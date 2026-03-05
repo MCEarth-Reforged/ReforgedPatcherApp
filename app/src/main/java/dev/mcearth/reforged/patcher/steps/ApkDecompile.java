@@ -1,16 +1,16 @@
-package dev.projectearth.patcher.steps;
+package dev.mcearth.reforged.patcher.steps;
 
 import java.io.IOException;
 
 import brut.androlib.Androlib;
 import brut.androlib.ApkDecoder;
 import brut.androlib.res.AndrolibResources;
-import dev.projectearth.patcher.MainActivity;
-import dev.projectearth.patcher.R;
-import dev.projectearth.patcher.utils.AndroidUtils;
-import dev.projectearth.patcher.utils.LoggedRunnable;
-import dev.projectearth.patcher.utils.StorageLocations;
-import dev.projectearth.patcher.utils.UILogger;
+import dev.mcearth.reforged.patcher.MainActivity;
+import dev.mcearth.reforged.patcher.R;
+import dev.mcearth.reforged.patcher.utils.AndroidUtils;
+import dev.mcearth.reforged.patcher.utils.LoggedRunnable;
+import dev.mcearth.reforged.patcher.utils.StorageLocations;
+import dev.mcearth.reforged.patcher.utils.UILogger;
 import lombok.SneakyThrows;
 
 public class ApkDecompile extends LoggedRunnable {

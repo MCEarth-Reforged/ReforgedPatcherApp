@@ -57,8 +57,8 @@ pipeline {
                 env.changes = message
             }
             deleteDir()
-            withCredentials([string(credentialsId: 'projectearth-discord-webhook', variable: 'DISCORD_WEBHOOK')]) {
-                discordSend description: "**Build:** [${currentBuild.id}](${env.BUILD_URL})\n**Status:** [${currentBuild.currentResult}](${env.BUILD_URL})\n${changes}\n\n[**Artifacts on Jenkins**](https://ci.rtm516.co.uk/job/ProjectEarth/job/PatcherApp/job/master/)", footer: 'rtm516\'s Jenkins', link: env.BUILD_URL, successful: currentBuild.resultIsBetterOrEqualTo('SUCCESS'), title: "${env.JOB_NAME} #${currentBuild.id}", webhookURL: DISCORD_WEBHOOK
+            withCredentials([string(credentialsId: 'mcearth-reforged-discord-webhook', variable: 'DISCORD_WEBHOOK')]) {
+                discordSend description: "**Build:** [${currentBuild.id}](${env.BUILD_URL})\n**Status:** [${currentBuild.currentResult}](${env.BUILD_URL})\n${changes}\n\n[**Artifacts on Jenkins**](https://ci.rtm516.co.uk/job/MCEarth-Reforged/job/ReforgedPatcherApp/job/master/)", footer: 'rtm516\'s Jenkins', link: env.BUILD_URL, successful: currentBuild.resultIsBetterOrEqualTo('SUCCESS'), title: "${env.JOB_NAME} #${currentBuild.id}", webhookURL: DISCORD_WEBHOOK
             }
         }
     }

@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:340772021308:android:79aef38463ce9fb3290f39",
         "android_client_info": {
-          "package_name": "dev.projectearth.patcher"
+          "package_name": "dev.mcearth.reforged.patcher"
         }
       },
       "oauth_client": [

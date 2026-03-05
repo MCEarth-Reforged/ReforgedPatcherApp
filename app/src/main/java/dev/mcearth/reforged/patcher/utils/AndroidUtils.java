@@ -1,4 +1,4 @@
-package dev.projectearth.patcher.utils;
+package dev.mcearth.reforged.patcher.utils;
 
 import android.content.Context;
 import android.content.Intent;

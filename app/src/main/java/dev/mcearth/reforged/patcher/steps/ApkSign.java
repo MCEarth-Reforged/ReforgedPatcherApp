@@ -1,4 +1,4 @@
-package dev.projectearth.patcher.steps;
+package dev.mcearth.reforged.patcher.steps;
 
 import java.security.Key;
 import java.security.KeyStore;
@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import dev.projectearth.patcher.MainActivity;
-import dev.projectearth.patcher.R;
-import dev.projectearth.patcher.utils.LoggedRunnable;
-import dev.projectearth.patcher.utils.StorageLocations;
+import dev.mcearth.reforged.patcher.MainActivity;
+import dev.mcearth.reforged.patcher.R;
+import dev.mcearth.reforged.patcher.utils.LoggedRunnable;
+import dev.mcearth.reforged.patcher.utils.StorageLocations;
 import kellinwood.security.zipsigner.ZipSigner;
 import kellinwood.security.zipsigner.optional.KeyStoreFileManager;
 import lombok.SneakyThrows;

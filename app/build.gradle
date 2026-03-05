@@ -6,7 +6,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "dev.projectearth.patcher"
+        applicationId "dev.mcearth.reforged.patcher"
         minSdkVersion 26
         targetSdkVersion 28 // Cant be 29 because that breaks aapt from being runnable
         versionCode 1

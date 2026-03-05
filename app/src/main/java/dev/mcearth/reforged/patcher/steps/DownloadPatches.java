@@ -1,4 +1,4 @@
-package dev.projectearth.patcher.steps;
+package dev.mcearth.reforged.patcher.steps;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,11 +9,11 @@ import java.nio.file.Paths;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import dev.projectearth.patcher.MainActivity;
-import dev.projectearth.patcher.R;
-import dev.projectearth.patcher.utils.AndroidUtils;
-import dev.projectearth.patcher.utils.LoggedRunnable;
-import dev.projectearth.patcher.utils.StorageLocations;
+import dev.mcearth.reforged.patcher.MainActivity;
+import dev.mcearth.reforged.patcher.R;
+import dev.mcearth.reforged.patcher.utils.AndroidUtils;
+import dev.mcearth.reforged.patcher.utils.LoggedRunnable;
+import dev.mcearth.reforged.patcher.utils.StorageLocations;
 import lombok.SneakyThrows;
 
 public class DownloadPatches extends LoggedRunnable {
@@ -37,7 +37,7 @@ public class DownloadPatches extends LoggedRunnable {
 
         // Always download the latest patches
         logEventListener.onLogLine(MainActivity.getAppContext().getResources().getString(R.string.step_download_downloading));
-        AndroidUtils.downloadFile("https://github.com/Project-Earth-Team/Patches/archive/main.zip", zipFile);
+        AndroidUtils.downloadFile("https://github.com/MCEarth-Reforged/ReforgedPatches/archive/main.zip", zipFile);
 
         logEventListener.onLogLine(MainActivity.getAppContext().getResources().getString(R.string.step_download_extract));
         try (ZipInputStream zip = new ZipInputStream(new FileInputStream(zipFile))) {

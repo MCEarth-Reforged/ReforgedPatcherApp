@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "Project Earth Patcher"
+rootProject.name = "MCEarth: Reforged Patcher"

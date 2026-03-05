@@ -1,4 +1,4 @@
-package dev.projectearth.patcher;
+package dev.mcearth.reforged.patcher;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,13 +11,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
-import dev.projectearth.patcher.steps.ApkDecompile;
-import dev.projectearth.patcher.steps.ApkRecompile;
-import dev.projectearth.patcher.steps.ApkSign;
-import dev.projectearth.patcher.steps.DownloadPatches;
-import dev.projectearth.patcher.steps.PatchApp;
-import dev.projectearth.patcher.utils.LogStep;
-import dev.projectearth.patcher.utils.StorageLocations;
+import dev.mcearth.reforged.patcher.steps.ApkDecompile;
+import dev.mcearth.reforged.patcher.steps.ApkRecompile;
+import dev.mcearth.reforged.patcher.steps.ApkSign;
+import dev.mcearth.reforged.patcher.steps.DownloadPatches;
+import dev.mcearth.reforged.patcher.steps.PatchApp;
+import dev.mcearth.reforged.patcher.utils.LogStep;
+import dev.mcearth.reforged.patcher.utils.StorageLocations;
 import ernestoyaquello.com.verticalstepperform.VerticalStepperFormView;
 import ernestoyaquello.com.verticalstepperform.listener.StepperFormListener;
 

@@ -1,4 +1,4 @@
-package dev.projectearth.patcher;
+package dev.mcearth.reforged.patcher;
 
 import android.os.Bundle;
 import android.view.MenuItem;

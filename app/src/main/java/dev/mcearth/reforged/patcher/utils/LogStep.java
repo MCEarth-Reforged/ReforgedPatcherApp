@@ -1,4 +1,4 @@
-package dev.projectearth.patcher.utils;
+package dev.mcearth.reforged.patcher.utils;
 
 import android.os.AsyncTask;
 import android.view.Gravity;
@@ -7,8 +7,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.content.res.AppCompatResources;
 
-import dev.projectearth.patcher.MainActivity;
-import dev.projectearth.patcher.R;
+import dev.mcearth.reforged.patcher.MainActivity;
+import dev.mcearth.reforged.patcher.R;
 import ernestoyaquello.com.verticalstepperform.Step;
 
 public class LogStep extends Step<String> {

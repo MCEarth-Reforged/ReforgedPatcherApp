@@ -1,4 +1,4 @@
-package dev.projectearth.patcher;
+package dev.mcearth.reforged.patcher;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import dev.projectearth.patcher.utils.AndroidUtils;
+import dev.mcearth.reforged.patcher.utils.AndroidUtils;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -38,10 +38,10 @@ public class AboutActivity extends AppCompatActivity {
         public boolean onPreferenceTreeClick(Preference preference) {
             switch (preference.getKey()) {
                 case "github":
-                    AndroidUtils.showURL(requireContext(), "https://github.com/Project-Earth-Team/PatcherApp");
+                    AndroidUtils.showURL(requireContext(), "https://github.com/MCEarth-Reforged/ReforgedPatcherApp");
                     return true;
                 case "website":
-                    AndroidUtils.showURL(requireContext(), "https://projectearth.dev");
+                    AndroidUtils.showURL(requireContext(), "https://mcearth.dev");
                     return true;
 
                 default:

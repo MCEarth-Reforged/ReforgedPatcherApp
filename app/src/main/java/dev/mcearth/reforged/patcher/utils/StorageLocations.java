@@ -1,4 +1,4 @@
-package dev.projectearth.patcher.utils;
+package dev.mcearth.reforged.patcher.utils;
 
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -11,8 +11,8 @@ import java.io.OutputStream;
 import java.nio.file.Path;
 import java.util.List;
 
-import dev.projectearth.patcher.MainActivity;
-import dev.projectearth.patcher.R;
+import dev.mcearth.reforged.patcher.MainActivity;
+import dev.mcearth.reforged.patcher.R;
 import lombok.Getter;
 
 public class StorageLocations {
@@ -36,8 +36,8 @@ public class StorageLocations {
     static {
         patchDir = MainActivity.getAppContext().getExternalCacheDir().toPath().resolve("patches");
         outDir = MainActivity.getAppContext().getExternalCacheDir().toPath().resolve("com.mojang.minecraftearth");
-        outFile = MainActivity.getAppContext().getExternalCacheDir().toPath().resolve("dev.projectearth.prod.unsigned.apk").toFile();
-        outFileSigned = MainActivity.getAppContext().getExternalFilesDir("").toPath().resolve("dev.projectearth.prod.apk").toFile();
+        outFile = MainActivity.getAppContext().getExternalCacheDir().toPath().resolve("dev.mcearth.reforged.prod.unsigned.apk").toFile();
+        outFileSigned = MainActivity.getAppContext().getExternalFilesDir("").toPath().resolve("dev.mcearth.reforged.prod.apk").toFile();
         frameworkDir = MainActivity.getAppContext().getExternalCacheDir().toPath().resolve("framework").toString();
         aaptExec = MainActivity.getAppContext().getFilesDir().toPath().resolve("aapt").toFile();
         earthKeystore = MainActivity.getAppContext().getFilesDir().toPath().resolve("earth_test.jks").toFile();

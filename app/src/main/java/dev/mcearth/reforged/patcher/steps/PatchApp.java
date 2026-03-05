@@ -1,4 +1,4 @@
-package dev.projectearth.patcher.steps;
+package dev.mcearth.reforged.patcher.steps;
 
 import androidx.preference.PreferenceManager;
 
@@ -11,11 +11,11 @@ import java.io.FileInputStream;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
 
-import dev.projectearth.patcher.MainActivity;
-import dev.projectearth.patcher.R;
-import dev.projectearth.patcher.utils.AndroidUtils;
-import dev.projectearth.patcher.utils.LoggedRunnable;
-import dev.projectearth.patcher.utils.StorageLocations;
+import dev.mcearth.reforged.patcher.MainActivity;
+import dev.mcearth.reforged.patcher.R;
+import dev.mcearth.reforged.patcher.utils.AndroidUtils;
+import dev.mcearth.reforged.patcher.utils.LoggedRunnable;
+import dev.mcearth.reforged.patcher.utils.StorageLocations;
 import lombok.SneakyThrows;
 
 public class PatchApp extends LoggedRunnable {
@@ -25,7 +25,7 @@ public class PatchApp extends LoggedRunnable {
     @Override
     public void run() {
         logEventListener.onLogLine(MainActivity.getAppContext().getResources().getString(R.string.step_patch_server));
-        String serverAddress = PreferenceManager.getDefaultSharedPreferences(MainActivity.getAppContext()).getString("locator_server", "https://p.projectearth.dev");
+        String serverAddress = PreferenceManager.getDefaultSharedPreferences(MainActivity.getAppContext()).getString("locator_server", "https://p.mcearth.dev");
 
         // Make sure we have http or https
         if (!serverAddress.matches("^(http|https)://.*$")) {

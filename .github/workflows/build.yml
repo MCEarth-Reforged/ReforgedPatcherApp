@@ -1,0 +1,207 @@
+name: Build Android Application
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 8
+      uses: actions/setup-java@v4
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+        
+    - name: Cache Gradle packages
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+          
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Build with Gradle
+      run: ./gradlew build
+      
+    - name: Build Release APK
+      run: ./gradlew assembleRelease
+      
+    - name: Upload Debug APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: debug-apk
+        path: app/build/outputs/apk/debug/*.apk
+        
+    - name: Upload Release APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: release-apk
+        path: app/build/outputs/apk/release/*.apk
+        
+    - name: Get APK info
+      id: apk-info
+      run: |
+        APK_PATH=$(find app/build/outputs/apk/release -name "*.apk" | head -n 1)
+        APK_NAME=$(basename "$APK_PATH")
+        echo "apk-name=$APK_NAME" >> $GITHUB_OUTPUT
+        echo "apk-path=$APK_PATH" >> $GITHUB_OUTPUT
+        
+    - name: Generate Build Summary
+      run: |
+        echo "## Build Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- **Application**: MCEarth Reforged Patcher" >> $GITHUB_STEP_SUMMARY
+        echo "- **Package**: dev.mcearth.reforged.patcher" >> $GITHUB_STEP_SUMMARY
+        echo "- **APK Name**: ${{ steps.apk-info.outputs.apk-name }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Build Status**: ✅ Success" >> $GITHUB_STEP_SUMMARY
+        echo "- **Java Version**: 8" >> $GITHUB_STEP_SUMMARY
+        echo "- **Gradle Version**: 6" >> $GITHUB_STEP_SUMMARY
+        
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 8
+      uses: actions/setup-java@v4
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+        
+    - name: Cache Gradle packages
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+          
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Run Lint
+      run: ./gradlew lint
+      
+    - name: Upload Lint Results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: lint-results
+        path: app/build/reports/lint-results*.html
+        
+    - name: Lint Summary
+      if: always()
+      run: |
+        echo "## Lint Results" >> $GITHUB_STEP_SUMMARY
+        if [ -f "app/build/reports/lint-results.html" ]; then
+          echo "- **Status**: ✅ Lint completed" >> $GITHUB_STEP_SUMMARY
+          echo "- **Report**: Available in artifacts" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "- **Status**: ❌ Lint failed" >> $GITHUB_STEP_SUMMARY
+        fi
+
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 8
+      uses: actions/setup-java@v4
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+        
+    - name: Cache Gradle packages
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+          
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Run Tests
+      run: ./gradlew test
+      
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results
+        path: app/build/reports/tests/
+        
+    - name: Test Summary
+      if: always()
+      run: |
+        echo "## Test Results" >> $GITHUB_STEP_SUMMARY
+        if [ -d "app/build/reports/tests" ]; then
+          echo "- **Status**: ✅ Tests completed" >> $GITHUB_STEP_SUMMARY
+          echo "- **Report**: Available in artifacts" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "- **Status**: ❌ Tests failed" >> $GITHUB_STEP_SUMMARY
+        fi
+
+  release:
+    needs: [build, lint, test]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Download Release APK
+      uses: actions/download-artifact@v3
+      with:
+        name: release-apk
+        path: release-apk/
+        
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        name: MCEarth Reforged Patcher ${{ github.run_number }}
+        body: |
+          ## MCEarth Reforged Patcher Release
+          
+          ### Changes
+          - Automated build from commit ${{ github.sha }}
+          - Branch: ${{ github.ref_name }}
+          
+          ### Installation
+          1. Download the APK below
+          2. Enable "Install from unknown sources" on your device
+          3. Install the APK
+          
+          ### Package Information
+          - **Package**: dev.mcearth.reforged.patcher
+          - **Build**: ${{ github.run_number }}
+          - **Commit**: ${{ github.sha }}
+          
+        files: release-apk/*.apk
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
