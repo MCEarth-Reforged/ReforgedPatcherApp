@@ -34,6 +34,9 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
       
+    - name: Install patch utility
+      run: sudo apt-get update && sudo apt-get install -y patch
+      
     - name: Build with Gradle
       run: ./gradlew build
       
@@ -96,6 +99,9 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
       
+    - name: Install patch utility
+      run: sudo apt-get update && sudo apt-get install -y patch
+      
     - name: Run Lint
       run: ./gradlew lint
       
@@ -142,6 +148,9 @@ jobs:
           
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+      
+    - name: Install patch utility
+      run: sudo apt-get update && sudo apt-get install -y patch
       
     - name: Run Tests
       run: ./gradlew test

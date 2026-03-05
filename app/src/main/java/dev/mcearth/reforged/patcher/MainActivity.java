@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Get Project Earth
         try {
-            PackageInfo earthInfo = getPackageManager().getPackageInfo("dev.mcearth.reforged.prod", 0);
+            PackageInfo earthInfo = getPackageManager().getPackageInfo("dev.mcearth.reforged", 0);
             txtPJEDesc.setText(getString(R.string.activity_main_version, earthInfo.versionName, earthInfo.versionCode));
             imgPJEIcon.setImageDrawable(earthInfo.applicationInfo.loadIcon(getPackageManager()));
         } catch (PackageManager.NameNotFoundException ignored) { }
