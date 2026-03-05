@@ -193,7 +193,7 @@ jobs:
           if [ $APK_SIZE_MB -gt 50 ]; then
             echo "- ⚠️ **Warning**: APK is larger than 50MB" >> $GITHUB_STEP_SUMMARY
           elif [ $APK_SIZE_MB -gt 25 ]; then
-            echo "- ℹ **Info**: APK is moderately sized" >> $GITHUB_STEP_SUMMARY
+            echo "- ℹ️ **Info**: APK is moderately sized" >> $GITHUB_STEP_SUMMARY
           else
             echo "- ✅ **Good**: APK size is reasonable" >> $GITHUB_STEP_SUMMARY
           fi

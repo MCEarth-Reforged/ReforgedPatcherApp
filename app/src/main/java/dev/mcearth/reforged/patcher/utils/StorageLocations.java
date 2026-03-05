@@ -36,8 +36,8 @@ public class StorageLocations {
     static {
         patchDir = MainActivity.getAppContext().getExternalCacheDir().toPath().resolve("patches");
         outDir = MainActivity.getAppContext().getExternalCacheDir().toPath().resolve("com.mojang.minecraftearth");
-        outFile = MainActivity.getAppContext().getExternalCacheDir().toPath().resolve("dev.mcearth.reforged.prod.unsigned.apk").toFile();
-        outFileSigned = MainActivity.getAppContext().getExternalFilesDir("").toPath().resolve("dev.mcearth.reforged.prod.apk").toFile();
+        outFile = MainActivity.getAppContext().getExternalCacheDir().toPath().resolve("dev.mcearth.reforged.unsigned.apk").toFile();
+        outFileSigned = MainActivity.getAppContext().getExternalFilesDir("").toPath().resolve("dev.mcearth.reforged.apk").toFile();
         frameworkDir = MainActivity.getAppContext().getExternalCacheDir().toPath().resolve("framework").toString();
         aaptExec = MainActivity.getAppContext().getFilesDir().toPath().resolve("aapt").toFile();
         earthKeystore = MainActivity.getAppContext().getFilesDir().toPath().resolve("earth_test.jks").toFile();
