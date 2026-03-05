@@ -2,15 +2,13 @@ package dev.mcearth.reforged.patcher.steps;
 
 import androidx.preference.PreferenceManager;
 
-import java.io.BufferedReader;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.patch.FileHeader;
+import org.eclipse.jgit.patch.Patch;
+
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 
 import dev.mcearth.reforged.patcher.MainActivity;
@@ -31,7 +29,7 @@ public class PatchApp extends LoggedRunnable {
 
         // Make sure we have http or https
         if (!serverAddress.matches("^(http|https)://.*$")) {
-            serverAddress = "https://" + serverAddress;
+            serverAddress = "http://" + serverAddress;
         }
 
         // Remove trailing slash
@@ -56,64 +54,36 @@ public class PatchApp extends LoggedRunnable {
             raf.write(0x540005CB); // asm: b.ge -> b.lt
         }
 
-        // Apply patches using system patch command with -p1
-        File[] files = StorageLocations.getPatchDir().toFile().listFiles();
+        try (Git git = Git.init().setDirectory(StorageLocations.getOutDir().toFile()).call()) {
+            File[] files = StorageLocations.getPatchDir().toFile().listFiles();
 
-        if (files == null) {
-            logEventListener.onLogLine("No patches found");
-            return;
-        }
-
-        Arrays.sort(files); // Fix patch ordering on some devices
-
-        for (final File file : files) {
-            if (!file.getName().endsWith(".patch")) {
-                continue;
+            if (files == null) {
+                return;
             }
 
-            logEventListener.onLogLine(MainActivity.getAppContext().getResources().getString(R.string.step_patch_install, file.getName()));
+            Arrays.sort(files); // Fix patch ordering on some devices
 
-            try {
-                applyPatchWithSystemCommand(file);
-            } catch (Exception e) {
-                logEventListener.onLogLine("Failed to apply patch " + file.getName() + ": " + e.getMessage());
-                throw e;
-            }
-        }
-        logEventListener.onLogLine(MainActivity.getAppContext().getResources().getString(R.string.step_done));
-    }
+            for (final File file : files) {
+                if (!file.getName().endsWith(".patch")) {
+                    continue;
+                }
 
-    /**
-     * Apply a patch file using the system 'patch -p1' command
-     */
-    private void applyPatchWithSystemCommand(File patchFile) throws IOException, InterruptedException {
-        Path outputPath = StorageLocations.getOutDir();
-        
-        // Build the patch command
-        ProcessBuilder pb = new ProcessBuilder("patch", "-p1", "-i", patchFile.getAbsolutePath());
-        pb.directory(outputPath.toFile());
-        pb.redirectErrorStream(true);
-        
-        // Start the process
-        Process process = pb.start();
-        
-        // Read the output
-        StringBuilder output = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                output.append(line).append("\n");
-                logEventListener.onLogLine("patch: " + line);
+                logEventListener.onLogLine(MainActivity.getAppContext().getResources().getString(R.string.step_patch_install, file.getName()));
+
+                // Semi hacky fix for line endings being mixed in source files
+                FileInputStream patchFile = new FileInputStream(file);
+                Patch p = new Patch();
+                p.parse(patchFile);
+                for (FileHeader fileHeader : p.getFiles()) {
+                    if (fileHeader.getPatchType() == FileHeader.PatchType.UNIFIED) {
+                        // Replace the line endings
+                        AndroidUtils.normalizeFile(StorageLocations.getOutDir().resolve(fileHeader.getOldPath()).toFile());
+                    }
+                }
+
+                git.apply().setPatch(new FileInputStream(file)).call();
             }
+            logEventListener.onLogLine(MainActivity.getAppContext().getResources().getString(R.string.step_done));
         }
-        
-        // Wait for the process to complete
-        int exitCode = process.waitFor();
-        
-        if (exitCode != 0) {
-            throw new RuntimeException("Patch command failed with exit code " + exitCode + "\nOutput: " + output.toString());
-        }
-        
-        logEventListener.onLogLine("Successfully applied patch: " + patchFile.getName());
     }
 }
