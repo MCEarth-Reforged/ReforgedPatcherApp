@@ -41,7 +41,7 @@ public class AboutActivity extends AppCompatActivity {
                     AndroidUtils.showURL(requireContext(), "https://github.com/MCEarth-Reforged/ReforgedPatcherApp");
                     return true;
                 case "website":
-                    AndroidUtils.showURL(requireContext(), "https://github.com/MCEarth-Reforged");
+                    AndroidUtils.showURL(requireContext(), "https://reforged.voltaccept.com/");
                     return true;
 
                 default:

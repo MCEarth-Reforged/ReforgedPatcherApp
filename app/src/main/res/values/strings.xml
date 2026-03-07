@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project Earth: Patcher</string>
+    <string name="app_name">MCEarth: Reforged Patcher</string>
 
     <string name="activity_main_version">Version: %s (%d)</string>
     <string name="activity_main_patchable">Can be patched: %s</string>
@@ -26,7 +26,9 @@
 
     <string name="about_credits_title">Credits</string>
     <string name="about_credits_project_title">Project Earth Team</string>
-    <string name="about_credits_project_desc">Development of the App</string>
+    <string name="about_credits_project_desc">Original development of the App</string>
+    <string name="about_credits_reforged_title">MCEarth: Reforged</string>
+    <string name="about_credits_reforged_desc">Development of the App</string>
 
     <string name="step_done">Done!</string>
     <string name="step_failed">Failed</string>
