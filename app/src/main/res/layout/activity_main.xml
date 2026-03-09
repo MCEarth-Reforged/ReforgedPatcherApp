@@ -4,213 +4,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/glassmorphism_background"
     tools:context=".MainActivity">
 
-    <!-- Menu Button -->
-    <ImageView
-        android:id="@+id/menuButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_margin="16dp"
-        android:src="@android:drawable/ic_menu_more"
-        android:background="@drawable/glass_icon_background"
-        android:padding="8dp"
-        android:contentDescription="Menu"
-        app:tint="@color/text_primary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <Button
+        android:id="@+id/btnPatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Patch and install"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPJEDesc" />
 
-    <!-- Main Container -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/mainContainer"
+    <!-- Minecraft Earth -->
+    <TextView
+        android:id="@+id/txtMCETitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="48dp"
-        android:padding="8dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="0dp"
-        app:strokeWidth="1dp"
-        app:strokeColor="@color/glass_border"
-        app:cardBackgroundColor="@color/glass_surface"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Minecraft Earth"
+        app:layout_constraintEnd_toStartOf="@+id/imgMCEIcon"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="32dp">
-
-            <!-- App Title -->
-            <TextView
-                android:id="@+id/appTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Reforged Patcher"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:fontFamily="sans-serif-medium"
-                android:gravity="center"
-                android:padding="16dp"
-                android:layout_marginBottom="40dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <!-- Minecraft Earth Card -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/mceCard"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:padding="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/glass_border"
-                app:cardBackgroundColor="@color/glass_surface_light"
-                app:layout_constraintTop_toBottomOf="@id/appTitle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="20dp">
-
-                    <ImageView
-                        android:id="@+id/imgMCEIcon"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:background="@drawable/glass_icon_background"
-                        android:padding="12dp"
-                        android:src="@drawable/ic_question"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent" />
-
-                    <TextView
-                        android:id="@+id/txtMCETitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="Minecraft Earth"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary"
-                        android:fontFamily="sans-serif-medium"
-                        android:padding="8dp"
-                        android:layout_marginEnd="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/imgMCEIcon" />
-
-                    <TextView
-                        android:id="@+id/txtMCEDesc"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="Not installed"
-                        android:textSize="15sp"
-                        android:textColor="@color/text_secondary"
-                        android:padding="8dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtMCETitle"
-                        app:layout_constraintEnd_toStartOf="@id/imgMCEIcon" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- Project Earth Card -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/pjeCard"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
-                android:padding="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/glass_border"
-                app:cardBackgroundColor="@color/glass_surface_light"
-                app:layout_constraintTop_toBottomOf="@id/mceCard"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="20dp">
-
-                    <ImageView
-                        android:id="@+id/imgPJEIcon"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:background="@drawable/glass_icon_background"
-                        android:padding="12dp"
-                        android:src="@drawable/ic_question"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent" />
-
-                    <TextView
-                        android:id="@+id/txtPJETitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="Project Earth"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary"
-                        android:fontFamily="sans-serif-medium"
-                        android:padding="8dp"
-                        android:layout_marginEnd="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/imgPJEIcon" />
-
-                    <TextView
-                        android:id="@+id/txtPJEDesc"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="Not installed"
-                        android:textSize="15sp"
-                        android:textColor="@color/text_secondary"
-                        android:padding="8dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtPJETitle"
-                        app:layout_constraintEnd_toStartOf="@id/imgPJEIcon" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <!-- Action Button -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnPatch"
+    <TextView
+        android:id="@+id/txtMCEDesc"
         android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginBottom="48dp"
-        android:padding="16dp"
-        android:text="Patch and Install"
-        android:textSize="18sp"
-        android:textColor="@color/text_primary"
-        android:fontFamily="sans-serif-medium"
-        android:background="@drawable/gradient_background"
-        app:cornerRadius="16dp"
-        app:strokeWidth="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Not installed"
+        app:layout_constraintBottom_toBottomOf="@+id/imgMCEIcon"
+        app:layout_constraintEnd_toStartOf="@+id/imgMCEIcon"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtMCETitle" />
+
+    <ImageView
+        android:id="@+id/imgMCEIcon"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_question" />
+
+    <!-- MCEarth Reforged -->
+    <TextView
+        android:id="@+id/txtPJETitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:text="MCEarth Reforged"
+        app:layout_constraintEnd_toStartOf="@+id/imgPJEIcon"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtMCEDesc" />
+
+    <TextView
+        android:id="@+id/txtPJEDesc"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Not installed"
+        app:layout_constraintBottom_toBottomOf="@+id/imgPJEIcon"
+        app:layout_constraintEnd_toStartOf="@+id/imgMCEIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPJETitle" />
+
+    <ImageView
+        android:id="@+id/imgPJEIcon"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgMCEIcon"
+        app:srcCompat="@drawable/ic_question" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

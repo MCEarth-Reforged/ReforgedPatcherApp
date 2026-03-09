@@ -1,35 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Dark Glassmorphism Theme Colors -->
-    <color name="colorPrimary">#1E1E2E</color>
-    <color name="colorPrimaryDark">#0A0A14</color>
-    <color name="colorAccent">#7C3AED</color>
-    
-    <!-- Glassmorphism Background Colors -->
-    <color name="glass_surface">#1A1A2E</color>
-    <color name="glass_surface_light">#252542</color>
-    <color name="glass_border">#3A3A5C</color>
-    <color name="glass_overlay">#0FFFFFFF</color>
-    
-    <!-- Text Colors -->
-    <color name="text_primary">#FFFFFF</color>
-    <color name="text_secondary">#B8B8D1</color>
-    <color name="text_hint">#6B6B8A</color>
-    
-    <!-- Status and Accent Colors -->
-    <color name="success">#10B981</color>
-    <color name="warning">#F59E0B</color>
-    <color name="error">#EF4444</color>
-    <color name="info">#3B82F6</color>
-    
-    <!-- Glass Effect Colors -->
-    <color name="glass_frost">#E6FFFFFF</color>
-    <color name="glass_blur">#F0FFFFFF</color>
-    <color name="glass_shadow">#80000000</color>
-    
-    <!-- Gradient Colors -->
-    <color name="gradient_start">#667EEA</color>
-    <color name="gradient_end">#764BA2</color>
-    <color name="gradient_alt_start">#F093FB</color>
-    <color name="gradient_alt_end">#F5576C</color>
+    <color name="colorPrimary">#53A86B</color>
+    <color name="colorPrimaryDark">#397D50</color>
+    <color name="colorAccent">#53A5B7</color>
 </resources>
