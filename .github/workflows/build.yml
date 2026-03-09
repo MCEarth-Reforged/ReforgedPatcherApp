@@ -37,25 +37,16 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
       
-    - name: Build Release APK
-      run: ./gradlew assembleRelease
-      
     - name: Upload Debug APK
       uses: actions/upload-artifact@v4
       with:
         name: debug-apk
         path: app/build/outputs/apk/debug/*.apk
         
-    - name: Upload Release APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: release-apk
-        path: app/build/outputs/apk/release/*.apk
-        
-    - name: Get APK info
+    - name: Get Debug APK info
       id: apk-info
       run: |
-        APK_PATH=$(find app/build/outputs/apk/release -name "*.apk" | head -n 1)
+        APK_PATH=$(find app/build/outputs/apk/debug -name "*.apk" | head -n 1)
         APK_NAME=$(basename "$APK_PATH")
         echo "apk-name=$APK_NAME" >> $GITHUB_OUTPUT
         echo "apk-path=$APK_PATH" >> $GITHUB_OUTPUT
@@ -163,45 +154,3 @@ jobs:
         else
           echo "- **Status**: ❌ Tests failed" >> $GITHUB_STEP_SUMMARY
         fi
-
-  release:
-    needs: [build, lint, test]
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
-    
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      
-    - name: Download Release APK
-      uses: actions/download-artifact@v4
-      with:
-        name: release-apk
-        path: release-apk/
-        
-    - name: Create Release
-      uses: softprops/action-gh-release@v1
-      with:
-        name: MCEarth Reforged Patcher ${{ github.run_number }}
-        body: |
-          ## MCEarth Reforged Patcher Release
-          
-          ### Changes
-          - Automated build from commit ${{ github.sha }}
-          - Branch: ${{ github.ref_name }}
-          
-          ### Installation
-          1. Download the APK below
-          2. Enable "Install from unknown sources" on your device
-          3. Install the APK
-          
-          ### Package Information
-          - **Package**: dev.mcearth.reforged.patcher
-          - **Build**: ${{ github.run_number }}
-          - **Commit**: ${{ github.sha }}
-          
-        files: release-apk/*.apk
-        draft: false
-        prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -12,15 +12,19 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import dev.mcearth.reforged.patcher.utils.SlideInMenuManager;
 import lombok.Getter;
 
 public class MainActivity extends AppCompatActivity {
     @Getter
     private static Context appContext;
+    private SlideInMenuManager menuManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,15 @@ public class MainActivity extends AppCompatActivity {
 
         // Set default preferences
         PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
+
+        // Initialize slide-in menu
+        menuManager = new SlideInMenuManager(this, getSupportFragmentManager());
+        FrameLayout rootContainer = findViewById(android.R.id.content);
+        menuManager.createMenu(rootContainer);
+
+        // Setup menu button
+        ImageView menuButton = findViewById(R.id.menuButton);
+        menuButton.setOnClickListener(v -> menuManager.toggleMenu());
 
         TextView txtMCETitle = findViewById(R.id.txtMCETitle);
         TextView txtMCEDesc = findViewById(R.id.txtMCEDesc);
@@ -75,6 +88,15 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, InstallerStepsActivity.class);
             startActivity(intent);
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (menuManager != null && menuManager.isMenuOpen()) {
+            menuManager.closeMenu();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
