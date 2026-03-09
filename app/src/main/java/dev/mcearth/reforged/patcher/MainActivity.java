@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnPatch = findViewById(R.id.btnPatch);
 
-        txtMCETitle.setPaintFlags(txtMCETitle.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        txtPJETitle.setPaintFlags(txtPJETitle.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        txtMCETitle.setPaintFlags(txtMCETitle.getPaintFlags() & ~Paint.UNDERLINE_TEXT_FLAG);
+        txtPJETitle.setPaintFlags(txtPJETitle.getPaintFlags() & ~Paint.UNDERLINE_TEXT_FLAG);
 
         // Get Minecraft Earth
         try {
